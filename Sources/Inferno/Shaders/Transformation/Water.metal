@@ -24,21 +24,24 @@ using namespace metal;
 ///   Ranges from 1 to 5 work best; try starting with 3.
 /// - Parameter frequency: How often ripples should be created. Ranges from
 ///   5 to 25 work best; try starting with 10.
-/// - Returns: The adjusted pixel position in user-space coordinates.
+/// - Returns: The new pixel color.
 [[ stitchable ]] float2 water(float2 position, float2 size, float time, float speed, float strength, float frequency) {
-    // Calculate our coordinate in UV space, 0 to 1.
-    half2 uv = half2(position / size);
-
-    // Bring both speed and strength into the kinds of
-    // ranges we need for this effect.
-    half adjustedSpeed = time * speed * 0.05h;
-    half adjustedStrength = strength / 100.0h;
-
-    // Offset the coordinate by a small amount in each
-    // direction, based on wave frequency and wave strength.
-    uv.x += sin((uv.x + adjustedSpeed) * frequency) * adjustedStrength;
-    uv.y += cos((uv.y + adjustedSpeed) * frequency) * adjustedStrength;
-
-    // Bring the position back up to user-space coordinates.
-    return float2(uv) * size;
+    // 0..1 UV in float (avoid half precision for time-driven math)
+    float2 uv = position / size;
+    
+    // Use float, not half, and avoid the `h` suffixes
+    float adjustedSpeed    = time * speed * 0.05f;
+    float adjustedStrength = strength / 100.0f;
+    
+    // Wrap the phase so sin/cos never see huge arguments
+    const float TWO_PI = 6.28318530718f;
+    float phase = fmod(adjustedSpeed * frequency, TWO_PI);
+    
+    // Use the wrapped phase; fast:: trig is fine for this effect
+    float argX = frequency * uv.x + phase;
+    float argY = frequency * uv.y + phase;
+    uv.x += fast::sin(argX) * adjustedStrength;
+    uv.y += fast::cos(argY) * adjustedStrength;
+    
+    return uv * size;
 }
