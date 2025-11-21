@@ -30,12 +30,15 @@ struct ShapeBlurPreview: View {
     /// Whether to invert the mask (blur within the shape or outside the shape).
     @State private var invertMask = true
     
+    /// Whether or not to normalize (i.e. avoid blurring) the edges of the view's frame.
+    @State private var normalizeEdges = false
+    
     var body: some View {
         VStack {
             ContentPreviewSelector()
             
             ContentPreview()
-                .variableBlur(radius: radius, maxSampleCount: Int(maxSamples)) { geometryProxy, context in
+                .variableBlur(radius: radius, maxSampleCount: Int(maxSamples), normalizeEdges: normalizeEdges) { geometryProxy, context in
                     // Add a blur to the mask to fade the edges of the shape.
                     context.addFilter(
                         .blur(radius: shapeFade)
@@ -76,6 +79,7 @@ struct ShapeBlurPreview: View {
                     Slider(value: $shapeFade, in: 0.0...100.0)
                 }
                 Toggle("Invert Mask", isOn: $invertMask)
+                Toggle("Normalize Edges", isOn: $normalizeEdges)
                 LabeledContent("Maximum Sample Count") {
                     Slider(value: $maxSamples, in: 1.0...30.0, step: 1.0)
                 }

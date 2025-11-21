@@ -24,12 +24,15 @@ struct ProgressiveBlurPreview: View {
     /// The maximum number of samples to use for the blur.
     @State private var maxSamples = 15.0
     
+    /// Whether or not to normalize (i.e. avoid blurring) the edges of the view's frame.
+    @State private var normalizeEdges = false
+    
     var body: some View {
         VStack {
             ContentPreviewSelector()
             
             ContentPreview()
-                .variableBlur(radius: radius, maxSampleCount: Int(maxSamples)) { geometryProxy, context in
+                .variableBlur(radius: radius, maxSampleCount: Int(maxSamples), normalizeEdges: normalizeEdges) { geometryProxy, context in
                     // Draw a rectangle covering the entire mask and fill it using a linear gradient from the specified points within the view's frame.
                     context.fill(
                         Path(geometryProxy.frame(in: .local)),
@@ -55,6 +58,7 @@ struct ProgressiveBlurPreview: View {
                 LabeledContent("Blur Mask End") {
                     Slider(value: $end, in: 0.0...1.0)
                 }
+                Toggle("Normalize Edges", isOn: $normalizeEdges)
                 LabeledContent("Maximum Sample Count") {
                     Slider(value: $maxSamples, in: 1.0...30.0, step: 1.0)
                 }
