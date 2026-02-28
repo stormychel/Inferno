@@ -24,6 +24,7 @@ If you’re already comfortable with shaders then please download one or more th
 - [Reading the shader code](#reading-the-shader-code)
 - [Shaders included in Inferno](#shaders-included-in-inferno)
 - [Transitions included in Inferno](#transitions-included-in-inferno)
+- [View Extensions](#view-extensions)
 - [Inferno Sandbox](#inferno-sandbox)
 - [Contributing](#contributing)
 - [License](#license)
@@ -1613,6 +1614,39 @@ struct ContentView: View {
 ```
 </details>
 </details>
+
+## View Extensions
+
+Inferno provides convenient SwiftUI View extensions that make applying shaders even easier. Instead of using the shader library directly, you can use these simple modifiers:
+
+| Extension | Description |
+|-----------|-------------|
+| `.checkerboard(size:color:)` | Applies a checkerboard pattern effect |
+| `.emboss(strength:)` | Creates an embossing effect |
+| `.gradientFill()` | Applies a diagonal gradient fill |
+| `.infrared()` | Simulates an infrared thermal camera |
+| `.interlace(width:color:strength:)` | Applies horizontal interlacing lines |
+| `.invertAlpha(replacement:)` | Inverts alpha values with a replacement color |
+| `.passthrough()` | Returns the view unchanged (useful for debugging) |
+| `.rainbowNoise(time:)` | Applies dynamic multi-colored noise |
+| `.recolor(to:)` | Recolors the view while preserving alpha |
+
+**Example usage:**
+
+```swift
+// Before (using shader directly):
+Image("photo")
+    .colorEffect(
+        InfernoShaderLibrary.checkerboard(
+            .color(.blue),
+            .float(10)
+        )
+    )
+
+// After (using View extension):
+Image("photo")
+    .checkerboard(size: 10, color: .blue)
+```
 
 ## Inferno Sandbox
 
