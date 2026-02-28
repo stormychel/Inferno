@@ -1617,6 +1617,9 @@ struct ContentView: View {
 
 ## View Extensions
 
+<details>
+<summary> Details (Click to expand) </summary>
+
 Inferno provides convenient SwiftUI View extensions that make applying shaders even easier. Instead of using the shader library directly, you can use these simple modifiers:
 
 | Extension | Description |
@@ -1647,6 +1650,8 @@ Image("photo")
 Image("photo")
     .checkerboard(size: 10, color: .blue)
 ```
+
+</details>
 
 ## Inferno Sandbox
 
