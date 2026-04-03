@@ -313,7 +313,7 @@ struct ContentView: View {
 
 ![A color planes shader.](assets/color-planes.png)
 
-A `layerEffect()` shader that separates the RGB values for a pixel and offsets them to create a glitch-style effect. This works particularly well on iOS when the `offset` value is provided as though accelerometer data.
+A `layerEffect()` shader that separates the RGB values for a pixel and offsets them to create a glitch-style effect. This works particularly well on iOS when the `offset` value is provided as accelerometer data.
 
 **Parameters:**
 
