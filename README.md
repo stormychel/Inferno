@@ -70,7 +70,7 @@ Shaders are written in the Metal Shading Language (MSL), which is a simple, fast
 
 SwiftUI is able to work with a variety of Metal shaders, depending on what kind of effect you're trying to create.
 
-MSL comes with a wide variety of built-in data types and functions, many of which operate on more than one data types. The data types used in Inferno are nice and simple:
+MSL comes with a wide variety of built-in data types and functions, many of which operate on more than one data type. The data types used in Inferno are nice and simple:
 
 - `bool`: A Boolean, i.e. true or false.
 - `float`: A floating-point number.
@@ -313,7 +313,7 @@ struct ContentView: View {
 
 ![A color planes shader.](assets/color-planes.png)
 
-A `layerEffect()` shader that separates the RGB values for a pixel and offsets them to create a glitch-style effect. This works particularly well on iOS when the `offset` value is provided as through accelerometer data.
+A `layerEffect()` shader that separates the RGB values for a pixel and offsets them to create a glitch-style effect. This works particularly well on iOS when the `offset` value is provided as though accelerometer data.
 
 **Parameters:**
 
@@ -1655,7 +1655,7 @@ Image("photo")
 
 ## Inferno Sandbox
 
-Inside this repository is an example SwiftUI project for macOS that demonstrate each of the shaders with some example values – try running them if you’re curious how each of the shaders look or perform.
+Inside this repository is an example SwiftUI project for macOS that demonstrates each of the shaders with some example values – try running them if you’re curious how each of the shaders look or perform.
 
 If you’ve modified one of the shaders and want to see how it looks, the sandbox is the best place. If you click the "Toggle Opacity" toolbar button, preview content will alternate between opacity 0 and 1 so you can make sure your modifications blend correctly.
 
@@ -1668,7 +1668,7 @@ All shaders here work great on all devices that support macOS Sonoma and coordin
 
 I made Inferno because not enough people know that shaders are powerful, easy ways to add special effects to your apps. If you’d like to contribute your own shaders or modifications to existing shaders, that’s great! But first please read the following:
 
-- Inferno has a strong emphasis on readability. Beginners should be able to read most of these shaders and have a good idea of how they work. If you want to make one of the shaders faster, please don’t do so at the expensive of readability.
+- Inferno has a strong emphasis on readability. Beginners should be able to read most of these shaders and have a good idea of how they work. If you want to make one of the shaders faster, please don’t do so at the expense of readability.
 - You must comment your code thoroughly. Shaders are often extremely terse, so please write in English above every line what the code does – a transliteration, if you will – and also provide a description of how it all works to produce the final result.
 - All code must be licensed under the MIT license so it can benefit the most people.
 - Please add your code to the Inferno Sandbox app, so folks can try it out easily.
